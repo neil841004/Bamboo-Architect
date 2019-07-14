@@ -6,11 +6,22 @@ public class GameManager : MonoBehaviour
 {
     public GameObject[] displayUI;
     public static int level3_2 = 1;
+    public Sprite optionIconOrigin;
+    public GameObject[] optionIcon;
+    public bool answer = false;
+    public GameObject homeBtn;
+    public bool isHome = false;
 
     // Use this for initialization
     void Start()
     {
         Input.multiTouchEnabled = false;
+        // for (int i = 1; i <= 17; i++)
+        // {
+        //     displayUI[i].SetActive(false);
+        // }
+        // displayUI[0].SetActive(true);
+        // homeBtn.SetActive(false);
     }
 
     // Update is called once per frame
@@ -37,6 +48,36 @@ public class GameManager : MonoBehaviour
     IEnumerator functionName(int i, bool active)
     {
         yield return new WaitForSeconds(2f);
-        displayUI[i].SetActive(active);
+        if(!isHome)displayUI[i].SetActive(active);
+    }
+    public void ResetOptionIcon()
+    {
+        StartCoroutine(ResetOption());
+    }
+    IEnumerator ResetOption()
+    {
+        yield return new WaitForSeconds(2f);
+        for (int i = 0; i < 9; i++)
+        {
+            optionIcon[i].GetComponent<SpriteRenderer>().sprite = optionIconOrigin;
+        }
+    }
+    public void backHome(){
+        for (int i = 1; i <= 17; i++)
+        {
+            displayUI[i].SetActive(false);
+        }
+        displayUI[0].SetActive(true);
+        for (int i = 0; i < 9; i++)
+        {
+            optionIcon[i].GetComponent<SpriteRenderer>().sprite = optionIconOrigin;
+        }
+        isHome = true;
+        StartCoroutine(ResetIsHome());
+    }
+    IEnumerator ResetIsHome()
+    {
+        yield return new WaitForSeconds(2.1f);
+        isHome = false;
     }
 }

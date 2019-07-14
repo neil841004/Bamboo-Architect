@@ -11,23 +11,12 @@ public class ButtonLevel3 : MonoBehaviour
     public Sprite[] ansBox_Sprite;
     public GameObject question;
     public GameObject ansBox;
+    public Sprite[] iconOrigin;
+    public GameObject[] icon;
     int iPress = 0; //點了幾次
     int iQuestion = 0; //第幾題
-                       // Use this for initialization
-    void Start()
-    {
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (iPress == 0)
-        {
-            this.GetComponent<Image>().sprite = btn_Sprite[0];
-            question.GetComponent<SpriteRenderer>().sprite = question_Sprite[0];
-            ansBox.GetComponent<SpriteRenderer>().sprite = ansBox_Sprite[0];
-        }
-    }
+ 
     public void Press()
     {
         iPress++;
@@ -39,6 +28,10 @@ public class ButtonLevel3 : MonoBehaviour
                 if (iPress != 0)
                 {
                     iQuestion++;
+                    for (int i = 0; i < 3; i++)
+                    {
+                        icon[i].GetComponent<Image>().sprite = iconOrigin[i];
+                    }
                 }
             }
             else if (iPress % 2 == 1)
@@ -50,11 +43,25 @@ public class ButtonLevel3 : MonoBehaviour
         }
         if (iPress >= 10)
         {
-            iPress = 0;
-            iQuestion = 0;
+            
             GameObject.FindWithTag("GM").GetComponent<GameManager>().SendMessage("CloseUI", 15);
             GameObject.FindWithTag("GM").GetComponent<GameManager>().SendMessage("CloseUI", 16);
             GameObject.FindWithTag("GM").GetComponent<GameManager>().SendMessage("OpenUI", 17);
+            ResetIcon();
         }
+    }
+    public void ResetIcon()
+    {
+
+        iPress = 0;
+        iQuestion = 0;
+        this.GetComponent<Image>().sprite = btn_Sprite[0];
+        question.GetComponent<SpriteRenderer>().sprite = question_Sprite[0];
+        ansBox.GetComponent<SpriteRenderer>().sprite = ansBox_Sprite[0];
+        for (int i = 0; i < 3; i++)
+        {
+            icon[i].GetComponent<Image>().sprite = iconOrigin[i];
+        }
+
     }
 }

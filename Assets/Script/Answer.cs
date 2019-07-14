@@ -36,6 +36,7 @@ public class Answer : MonoBehaviour
                 }
                 if (q == 3)
                 {
+                    GameObject.FindWithTag("GM").GetComponent<GameManager>().SendMessage("ResetOptionIcon");
                     GameObject.FindWithTag("GM").GetComponent<GameManager>().SendMessage("CloseUIDelay", 9);
                     GameObject.FindWithTag("GM").GetComponent<GameManager>().SendMessage("OpenUIDelay", 14);
                     GameObject.FindWithTag("GM").GetComponent<GameManager>().SendMessage("CloseUIDelay", 12);
@@ -67,5 +68,7 @@ public class Answer : MonoBehaviour
         again.SetActive(false);
         answer = false;
     }
-
+    public void ResetQ(){
+        q = 0;
+    }
 }

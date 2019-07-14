@@ -56,6 +56,7 @@
      <Compile Include="Assets\Script\Answer.cs" />
      <Compile Include="Assets\Script\Could.cs" />
      <Compile Include="Assets\Script\GameManager.cs" />
+     <Compile Include="Assets\Script\Painter.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity 2017.3.1f1/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
