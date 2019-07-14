@@ -51,6 +51,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Button2_2.cs" />
+     <Compile Include="Assets\Script\Answer.cs" />
      <Compile Include="Assets\Script\Could.cs" />
      <Compile Include="Assets\Script\GameManager.cs" />
  <Reference Include="UnityEngine.UI">

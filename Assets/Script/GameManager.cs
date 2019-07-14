@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator functionName(int i, bool active)
     {
-        yield return new WaitForSeconds(0.08f);
+        yield return new WaitForSeconds(2f);
         displayUI[i].SetActive(active);
     }
 }
