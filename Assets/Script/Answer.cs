@@ -27,10 +27,21 @@ public class Answer : MonoBehaviour
             if (answer)
             {
                 resultO.SetActive(true);
-                GameObject.FindWithTag("GM").GetComponent<GameManager>().SendMessage("CloseUIDelay", 9);
-                GameObject.FindWithTag("GM").GetComponent<GameManager>().SendMessage("OpenUIDelay", 11 + q);
-                GameObject.FindWithTag("GM").GetComponent<GameManager>().SendMessage("CloseUIDelay", 10 + q);
-                q++;
+                if (q <= 2)
+                {
+                    GameObject.FindWithTag("GM").GetComponent<GameManager>().SendMessage("CloseUIDelay", 9);
+                    GameObject.FindWithTag("GM").GetComponent<GameManager>().SendMessage("OpenUIDelay", 11 + q);
+                    GameObject.FindWithTag("GM").GetComponent<GameManager>().SendMessage("CloseUIDelay", 10 + q);
+                    q++;
+                }
+                if (q == 3)
+                {
+                    GameObject.FindWithTag("GM").GetComponent<GameManager>().SendMessage("CloseUIDelay", 9);
+                    GameObject.FindWithTag("GM").GetComponent<GameManager>().SendMessage("OpenUIDelay", 14);
+                    GameObject.FindWithTag("GM").GetComponent<GameManager>().SendMessage("CloseUIDelay", 12);
+                    GameObject.FindWithTag("GM").GetComponent<GameManager>().SendMessage("CloseUIDelay", 13);
+                    q = 0;
+                }
                 //GameObject.FindWithTag("SE").SendMessage("PlaySE",1);
             }
             if (!answer)

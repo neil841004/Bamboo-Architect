@@ -11,10 +11,10 @@ public class Button2_2 : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (GameObject.FindWithTag("Result").activeInHierarchy){
+		if (GameObject.FindWithTag("Result")){
 			this.GetComponent<BoxCollider>().enabled=false;
 		}
-		else if (!GameObject.FindWithTag("Result").activeInHierarchy){
+		else if (!GameObject.FindWithTag("Result")){
 			this.GetComponent<BoxCollider>().enabled=true;
 		}
 	}
