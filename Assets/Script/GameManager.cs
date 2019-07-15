@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
     IEnumerator functionName(int i, bool active)
     {
         yield return new WaitForSeconds(2f);
-        if(!isHome)displayUI[i].SetActive(active);
+        if (!isHome) displayUI[i].SetActive(active);
     }
     public void ResetOptionIcon()
     {
@@ -62,7 +62,13 @@ public class GameManager : MonoBehaviour
             optionIcon[i].GetComponent<SpriteRenderer>().sprite = optionIconOrigin;
         }
     }
-    public void backHome(){
+    public void backHome()
+    {
+        if (GameObject.FindWithTag("Painter"))
+        {
+            GameObject.FindWithTag("Painter").GetComponent<Painter>().SendMessage("Clear");
+            GameObject.FindWithTag("Painter").SetActive(false);
+        }
         for (int i = 1; i <= 17; i++)
         {
             displayUI[i].SetActive(false);
