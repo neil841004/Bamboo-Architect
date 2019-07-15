@@ -22,11 +22,18 @@ public sealed class Painter : MonoBehaviour {
 		}
 	}
 
-	[SerializeField] Camera m_renderCamera;
-	[SerializeField] LineRenderer m_linePrefab;
-	[SerializeField] GameObject m_dotPrefab;
-	[SerializeField] Material m_solidLinePattern;
-	[SerializeField] Material m_dottedLinePattern;
+	public void Clear() {
+		while (m_dirtyTrack.Count != 0) {
+			Destroy(m_dirtyTrack.Pop());
+		}
+	}
+
+	[SerializeField] Camera m_renderCamera = null;
+	[SerializeField] Collider[] m_inputReceivers = new Collider[0];
+	[SerializeField] LineRenderer m_linePrefab = null;
+	[SerializeField] GameObject m_dotPrefab = null;
+	[SerializeField] Material m_solidLinePattern = null;
+	[SerializeField] Material m_dottedLinePattern = null;
 
 	enum BrushType {
 		Dot, SolidLine, DottedLine
@@ -34,15 +41,19 @@ public sealed class Painter : MonoBehaviour {
 	[SerializeField] BrushType m_currentBrush = BrushType.SolidLine;
 
 	LineRenderer m_currentLine = null;
+	Collider m_currentInputReceiver = null;
 	Stack<GameObject> m_dirtyTrack = new Stack<GameObject>();
 
 	void Update() {
 		if (m_currentBrush == BrushType.Dot) {
 			if (Input.GetMouseButtonDown(0)) {
-				GameObject dot = Instantiate(m_dotPrefab);
-				dot.SetActive(true);
-				dot.transform.position = ScreenPointToTransformPoint(Input.mousePosition);
-				m_dirtyTrack.Push(dot);
+				Vector3 position;
+				if (ScreenPointToWorldPosition(Input.mousePosition, out position)) {
+					GameObject dot = Instantiate(m_dotPrefab);
+					dot.transform.position = position;
+					dot.SetActive(true);
+					m_dirtyTrack.Push(dot);
+				}
 			}
 		} else {
 			Material pattern;
@@ -54,26 +65,42 @@ public sealed class Painter : MonoBehaviour {
 				pattern = null;
 			}
 			if (Input.GetMouseButtonDown(0)) {
-				m_currentLine = Instantiate(m_linePrefab);
-				m_currentLine.sharedMaterial = pattern;
-				m_currentLine.gameObject.SetActive(true);
-				Vector2 startingPosition = ScreenPointToTransformPoint(Input.mousePosition);
-				m_currentLine.SetPositions(new Vector3[] { startingPosition, startingPosition });
-			}
-			if (Input.GetMouseButtonUp(0)) {
-				m_dirtyTrack.Push(m_currentLine.gameObject);
-				m_currentLine = null;
+				Vector3 position;
+				if (m_currentInputReceiver = ScreenPointToWorldPosition(Input.mousePosition, out position)) {
+					m_currentLine = Instantiate(m_linePrefab);
+					m_currentLine.sharedMaterial = pattern;
+					m_currentLine.gameObject.SetActive(true);
+					m_currentLine.SetPositions(new Vector3[] {position, position});
+				}
 			}
 			if (m_currentLine) {
-				m_currentLine.SetPosition(1, ScreenPointToTransformPoint(Input.mousePosition));
+				m_currentLine.SetPosition(1, ScreenPointToTransformPoint(Input.mousePosition, m_currentInputReceiver.transform));
+				if (Input.GetMouseButtonUp(0)) {
+					m_dirtyTrack.Push(m_currentLine.gameObject);
+					m_currentLine = null;
+					m_currentInputReceiver = null;
+				}
 			}
 		}
 	}
 
-	Vector3 ScreenPointToTransformPoint(Vector3 screenPoint) {
+	Vector3 ScreenPointToTransformPoint(Vector3 screenPoint, Transform transform) {
 		Ray ray = m_renderCamera.ScreenPointToRay(screenPoint);
 		float dist;
 		new Plane(transform.forward, transform.position).Raycast(ray, out dist);
 		return ray.GetPoint(dist);
+	}
+
+	Collider ScreenPointToWorldPosition(Vector3 screenPoint, out Vector3 worldPosition) {
+		Ray ray = m_renderCamera.ScreenPointToRay(screenPoint);
+		for (int i = 0; i != m_inputReceivers.Length; ++i) {
+			RaycastHit hitRlt;
+			if (m_inputReceivers[i].Raycast(ray, out hitRlt, float.PositiveInfinity)) {
+				worldPosition = hitRlt.point;
+				return m_inputReceivers[i];
+			}
+		}
+		worldPosition = default(Vector3);
+		return null;
 	}
 }
