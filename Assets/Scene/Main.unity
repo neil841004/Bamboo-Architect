@@ -8074,7 +8074,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1811382811}
         m_MethodName: PaintWithSolidLine
         m_Mode: 1
         m_Arguments:
@@ -8085,7 +8085,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1811382809}
         m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
@@ -9745,7 +9745,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1811382811}
         m_MethodName: PaintWithDot
         m_Mode: 1
         m_Arguments:
@@ -9756,7 +9756,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1811382809}
         m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
@@ -10214,7 +10214,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1811382810
 Transform:
   m_ObjectHideFlags: 0
@@ -10393,7 +10393,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1811382811}
         m_MethodName: PaintWithDottedLine
         m_Mode: 1
         m_Arguments:
@@ -10404,7 +10404,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1811382809}
         m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
@@ -11252,7 +11252,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1811382811}
         m_MethodName: Undo
         m_Mode: 1
         m_Arguments:
