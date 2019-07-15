@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/Users/user/Desktop/unity/Bamboo-Architect/Temp/gradleOut/libs/unity-classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="28.0.3"
+        sha1="2d302418aa3482b8db770278260340aed47dd37a">
+        <dex dex="/Users/user/Desktop/unity/Bamboo-Architect/Temp/gradleOut/build/intermediates/pre-dexed/release/unity-classes_058a616c49ed1f8835e101a92721fb2aeb451e3c.jar" />
+    </item>
+
+</items>
