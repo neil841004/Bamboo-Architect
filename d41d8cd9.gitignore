@@ -1,0 +1,11 @@
+Library/
+Temp/
+
+Assembly-*
+*.csproj
+*.sln
+*.userprefs
+*.unityproj
+
+.vs/
+obj/Debug/
